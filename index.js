@@ -21,6 +21,13 @@ app.get('/personagem/:id', function (req, res) {
   // Acessa o item na lista usando o ID -1  
     const item = list[id -1]
 
+
+  //Checamos se o item obtido é existente
+  
+    if (!item) {
+      return res.status(404).send('Item não encontrado.')
+    }
+
   //Enviamos o item como resposta
     res.send(item)
 
@@ -59,6 +66,12 @@ app.put('/personagem/:id', function (req, res) {
    //Acessando o ID d parametros de rota
    const id = req.params.id
 
+  //Checamos se o item da ID esta na lista, exivindo
+  //uma mensagem caso não esteja.
+   if (!list[id -1]) {
+    return res.status(404).send('Item não encontrado.')
+  }
+
    //Acessamos o  body da requisição
    const body = req.body
    
@@ -85,6 +98,13 @@ app.put('/personagem/:id', function (req, res) {
   app.delete('/personagem/:id', function (req, res) {
     //Acessamos o parametro de rota
     const id = req.params.id
+
+  //Checamos se o item da ID esta na lista, exivindo
+  //uma mensagem caso não esteja.
+   if (!list[id -1]) {
+    return res.status(404).send('Item não encontrado.')
+  }
+
 
     //Remover o item da lista de usuario o ID -1
     delete list[id -1]
