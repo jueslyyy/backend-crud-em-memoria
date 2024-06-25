@@ -10,7 +10,7 @@ const list =['Java', 'Kotlin','Android']
 // Endpoint Read All [GET] /personagem
 
 app.get('/personagem', function (req, res) {
-    res.send(list)
+    res.send(list.filter(Boolean))
 })
 
 //Endpoint Read By ID [GET] /personagem/:id
@@ -59,6 +59,18 @@ app.put('/personagem/:id', function (req, res) {
    list[id -1] = novoItem
 
    res.send('Item atualizado com sucesso: ' + id + ' - ' +  novoItem)
+  })
+
+  //endpoint [Delete] /personagem:id
+  app.delete('/personagem/:id', function (req, res) {
+    //Acessamos o parametro de rota
+    const id = req.params.id
+
+    //Remover o item da lista de usuario o ID -1
+    delete list[id -1]
+
+    //Enviamos uma mensagem de sucesso
+    res.send('Item removido com sucsso: ' + id)
   })
 
 app.listen(3000)
